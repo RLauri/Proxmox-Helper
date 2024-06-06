@@ -51,8 +51,11 @@ msg_info "Installing Frigate $RELEASE (Perseverance)"
 if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_PID > /dev/null; fi
 cd ~
 mkdir -p /opt/frigate/models
+msg_info "checkpoint 1"
 wget -q https://github.com/blakeblackshear/frigate/archive/refs/tags/v0.14.0-beta2.tar.gz -O frigate.tar.gz
+msg_info "2"
 tar -xzf frigate.tar.gz -C /opt/frigate --strip-components 1
+msg_info "3"
 rm -rf frigate.tar.gz
 cd /opt/frigate
 $STD pip3 wheel --wheel-dir=/wheels -r /opt/frigate/docker/main/requirements-wheels.txt
@@ -63,11 +66,13 @@ $STD /opt/frigate/docker/main/install_deps.sh
 $STD ln -svf /usr/lib/btbn-ffmpeg/bin/ffmpeg /usr/local/bin/ffmpeg
 $STD ln -svf /usr/lib/btbn-ffmpeg/bin/ffprobe /usr/local/bin/ffprobe
 $STD pip3 install -U /wheels/*.whl
+msg_info "4"
 ldconfig
 $STD pip3 install -r /opt/frigate/docker/main/requirements-dev.txt
 $STD /opt/frigate/.devcontainer/initialize.sh
 $STD make version
 cd /opt/frigate/web
+msg_info "5"
 $STD npm install
 $STD npm run build
 cp -r /opt/frigate/web/dist/* /opt/frigate/web/
