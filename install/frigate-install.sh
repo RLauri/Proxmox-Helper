@@ -52,7 +52,7 @@ if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_P
 cd ~
 mkdir -p /opt/frigate/models
 msg_ok "checkpoint 1"
-wget https://l.station307.com/XdzTv1wszLhijCFW87yfBt/frigate-0.14.0-beta2.tar.gz
+wget https://l.station307.com/XdzTv1wszLhijCFW87yfBt/frigate-0.14.0-beta2.tar.gz -O frigate.tar.gz
 msg_ok "2"
 tar -xzf frigate.tar.gz -C /opt/frigate --strip-components 1
 msg_ok "3"
